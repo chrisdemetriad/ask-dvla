@@ -70,7 +70,8 @@ export default StyleSheet.create({
 
 		backgroundColor: "yellow",
 		fontSize: 35,
-
+		fontFamily: "UKNumberPlate_Regular",
+		fontSize: 45,
 		// textAlignVertical: "center",
 		textDecorationLine: "none",
 	},
