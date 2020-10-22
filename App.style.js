@@ -1,38 +1,45 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-	overview: { color: "white", fontSize: 23 },
-	mottax: { display: "flex", flexDirection: "row", justifyContent: "space-between" },
-	mot: {
-		borderTopStartRadius: 5,
-		borderBottomStartRadius: 5,
+	overview: {
+		color: "black",
+		fontSize: 24,
+		marginBottom: 20,
+		marginTop: 20,
+		fontFamily: "RobotoCondensed_300Light",
 	},
-	tax: {
-		borderTopEndRadius: 5,
-		borderBottomEndRadius: 5,
-	},
+
 	common: {
-		backgroundColor: "green",
 		display: "flex",
-		alignItems: "center",
 		fontSize: 22,
 		paddingVertical: 30,
 		width: "50%",
-
-		color: "white",
-		position: "relative",
 	},
-	label: {
-		position: "absolute",
-		color: "yellow",
-		top: 2,
-		left: 4,
+	status: {
+		fontFamily: "RobotoCondensed_300Light",
+		color: "black",
+	},
+	mtContainer: {
+		display: "flex",
+		flexDirection: "row",
+	},
+	title: {
+		fontFamily: "UKNumberPlate_Regular",
+		fontSize: 40,
+		color: "#666666",
+		marginBottom: 30,
+	},
+	date: {
+		fontFamily: "RobotoCondensed_300Light",
+		fontSize: 26,
+		color: "black",
+	},
+	statusError: {
+		color: "red",
 	},
 	error: {
-		backgroundColor: "darkred",
-		fontSize: 23,
-		color: "yellow",
-		padding: 10,
+		fontFamily: "RobotoCondensed_300Light",
+		fontSize: 16,
 	},
 	searchIconContainer: {
 		position: "absolute",
@@ -46,59 +53,68 @@ export default StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: "#1a2a57",
-		// alignItems: "center",
 		color: "#ffffff",
 		justifyContent: "center",
 		padding: 20,
 		width: "100%",
 	},
 	form: {
-		// flexDirection: "row",
 		display: "flex",
 		position: "relative",
+		flexDirection: "row",
+		borderColor: "black",
+		borderWidth: 1,
+		borderRadius: 6,
+		justifyContent: "flex-start",
+		backgroundColor: "#0076bc",
+
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 6,
+		},
+		shadowOpacity: 0.39,
+		shadowRadius: 8.3,
+
+		elevation: 13,
+	},
+	sideInfo: {
+		display: "flex",
+		justifyContent: "flex-end",
+	},
+	stars: {
+		width: 26,
+		margin: 4,
+		height: 30,
+		marginTop: 10,
+	},
+	countryCode: {
+		color: "#fdc832",
+		fontFamily: "UKNumberPlate_Regular",
+		flexGrow: 1,
+		display: "flex",
+		alignSelf: "center",
+		// textAlignVertical: "center",
 	},
 	input: {
-		borderColor: "green",
-		borderWidth: 6,
-
+		flexGrow: 1,
 		paddingVertical: 4,
-		paddingHorizontal: 10,
+		paddingHorizontal: 5,
 		height: 70,
-		borderTopLeftRadius: 6,
-		borderBottomLeftRadius: 6,
-
-		backgroundColor: "yellow",
-		fontSize: 35,
+		backgroundColor: "#fdc832",
 		fontFamily: "UKNumberPlate_Regular",
-		fontSize: 45,
-		// textAlignVertical: "center",
+		fontSize: 55,
 		textDecorationLine: "none",
+		borderTopRightRadius: 6,
+		borderBottomRightRadius: 6,
 	},
 	search: {
-		borderColor: "green",
-		borderWidth: 6,
 		paddingVertical: 4,
 		paddingHorizontal: 10,
 		height: 70,
 		borderTopRightRadius: 6,
 		borderBottomRightRadius: 6,
-
-		backgroundColor: "green",
 		fontSize: 18,
-
-		color: "yellow",
-
 		textAlignVertical: "center",
-	},
-	results: {
-		marginTop: 20,
-		// padding: 5,
-		// backgroundColor: "#1a2a57",
-	},
-	result: {
-		color: "pink",
-		marginBottom: 2,
-		fontSize: 20,
 	},
 });

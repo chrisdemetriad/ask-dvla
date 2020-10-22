@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View, Button, FlatList, TouchableOpacity, Image, TouchableWithoutFeedback, YellowBox } from "react-native";
+import React, { useState } from "react";
+import { Text, TextInput, View, Image } from "react-native";
 import styles from "./App.style.js";
 import { API_KEY } from "@env";
 
@@ -9,8 +9,8 @@ import { useFonts } from "expo-font";
 
 export default function App() {
 	let [fontsLoaded] = useFonts({
-		UKNumberPlate_Regular: require("./assets/UKNumberPlate.ttf"),
-		RobotoCondensed_300Light: require("./assets/RobotoCondensed-Light.ttf"),
+		UKNumberPlate_Regular: require("./assets/uknumberplate.ttf"),
+		RobotoCondensed_300Light: require("./assets/roboto.ttf"),
 	});
 
 	const [data, setData] = useState({});
@@ -44,7 +44,7 @@ export default function App() {
 
 	const onChangeText = (number) => {
 		setNumber(number);
-		console.log("Regplate number is " + number);
+		// console.log("Registration plate number is " + number);
 	};
 
 	const { make, colour, engineCapacity, fuelType, revenueWeight, yearOfManufacture, motStatus, motExpiryDate, taxStatus, taxDueDate } = data;
@@ -54,11 +54,14 @@ export default function App() {
 		return (
 			<View style={styles.container}>
 				<View style={styles.form}>
-					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={onChangeText} style={styles.input} placeholder="BA65 PDQ" />
-					<TouchableOpacity style={styles.searchIconContainer} onPress={onPress}>
-						{/* <Text style={styles.search}>SEARCH</Text> */}
+					<View style={styles.sideInfo}>
+						<Image style={styles.stars} source={require("./assets/eurostars.png")} />
+						<Text style={styles.countryCode}>GB</Text>
+					</View>
+					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={onChangeText} style={styles.input} placeholder="BA65 PDQ" placeholderTextColor="#e1ac18" caretHidden clearTextOnFocus />
+					{/* <TouchableOpacity style={styles.searchIconContainer} onPress={onPress}>
 						<Image style={styles.searchIcon} source={require("./assets/search.png")} />
-					</TouchableOpacity>
+					</TouchableOpacity> */}
 				</View>
 				{data.make && (
 					<View style={styles.results}>
@@ -66,20 +69,22 @@ export default function App() {
 							{yearOfManufacture} {make}, {colour}, {engineCapacity}cc, {fuelType}
 							{revenueWeight && ", " + revenueWeight + "kg"}
 						</Text>
-						<Text></Text>
-						<View style={styles.mottax}>
-							<View style={[styles.mot, styles.common]}>
-								<Text style={styles.label}>{motStatus == "Not valid" ? <Text>MOT Not Valid</Text> : motStatus}</Text>
+
+						<View style={styles.mtContainer}>
+							<View style={styles.common}>
+								{motStatus == "Not valid" ? <Text style={[styles.status, styles.statusError]}>MOT Not Valid</Text> : <Text style={styles.status}>{motStatus}</Text>}
+								<Text style={styles.title}>Mot</Text>
 								<Text style={styles.date}>{motExpiryDate}</Text>
 							</View>
-							<View style={[styles.tax, styles.common]}>
-								<Text style={styles.label}>{taxStatus == "Sorn" ? <Text>SOOOORN</Text> : taxStatus}</Text>
+							<View style={(styles.tax, styles.common)}>
+								{taxStatus == "SORN" ? <Text style={[styles.status, styles.statusError]}>DECLARED SORN</Text> : <Text style={styles.status}>{taxStatus}</Text>}
+								<Text style={styles.title}>Tax</Text>
 								<Text style={styles.date}>{taxDueDate}</Text>
 							</View>
 						</View>
 					</View>
 				)}
-				{!data.make && <Text style={styles.error}>Number is not valid.</Text>}
+				{!data.make && <Text style={styles.error}>Please enter a valid registration plate number.</Text>}
 			</View>
 		);
 	}
