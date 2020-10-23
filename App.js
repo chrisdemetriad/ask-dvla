@@ -7,6 +7,8 @@ import { API_KEY } from "@env";
 import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
 
+import Line from "./components/Line";
+
 export default function App() {
 	let [fontsLoaded] = useFonts({
 		UKNumberPlate_Regular: require("./assets/uknumberplate.ttf"),
@@ -58,7 +60,7 @@ export default function App() {
 						<Image style={styles.stars} source={require("./assets/eurostars.png")} />
 						<Text style={styles.countryCode}>GB</Text>
 					</View>
-					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={onChangeText} style={styles.input} placeholder="BA65 PDQ" placeholderTextColor="#e1ac18" caretHidden clearTextOnFocus />
+					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={onChangeText} style={styles.input} placeholder="BA65 PDQ" />
 					{/* <TouchableOpacity style={styles.searchIconContainer} onPress={onPress}>
 						<Image style={styles.searchIcon} source={require("./assets/search.png")} />
 					</TouchableOpacity> */}
@@ -69,7 +71,7 @@ export default function App() {
 							{yearOfManufacture} {make}, {colour}, {engineCapacity}cc, {fuelType}
 							{revenueWeight && ", " + revenueWeight + "kg"}
 						</Text>
-
+						<Line />
 						<View style={styles.mtContainer}>
 							<View style={styles.common}>
 								{motStatus == "Not valid" ? <Text style={[styles.status, styles.statusError]}>MOT Not Valid</Text> : <Text style={styles.status}>{motStatus}</Text>}
