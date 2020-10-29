@@ -1,26 +1,26 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { Text, TextInput, View, Image } from "react-native";
 import styles from "./App.style.js";
 import { API_KEY } from "@env";
-
+import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
 
 import Line from "./components/Line";
 
 export default function App() {
+	const [data, setData] = useState({});
+	const [number, setNumber] = useState("");
+
 	let [fontsLoaded] = useFonts({
 		UKNumberPlate_Regular: require("./assets/uknumberplate.ttf"),
 		RobotoCondensed_300Light: require("./assets/roboto.ttf"),
 	});
 
-	const [data, setData] = useState({});
-	const [number, setNumber] = useState("");
 	const url = "https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles";
 
 	const load = async (number) => {
-		console.log("loadcalled: ", number);
+		// console.log("load() called: ", number);
 		const response = await fetch(url, {
 			body: '{"registrationNumber":"' + number + '"}',
 			// body: '{"registrationNumber": "YT17 EFM"}',
@@ -61,9 +61,6 @@ export default function App() {
 						<Text style={styles.countryCode}>GB</Text>
 					</View>
 					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={onChangeText} style={styles.input} placeholder="BA65 PDQ" />
-					{/* <TouchableOpacity style={styles.searchIconContainer} onPress={onPress}>
-						<Image style={styles.searchIcon} source={require("./assets/search.png")} />
-					</TouchableOpacity> */}
 				</View>
 				{data.make && (
 					<View style={styles.results}>
@@ -72,14 +69,34 @@ export default function App() {
 							{revenueWeight && ", " + revenueWeight + "kg"}
 						</Text>
 						<Line />
-						<View style={styles.mtContainer}>
+						<View style={styles.resultsContainer}>
 							<View style={styles.common}>
-								{motStatus == "Not valid" ? <Text style={[styles.status, styles.statusError]}>MOT Not Valid</Text> : <Text style={styles.status}>{motStatus}</Text>}
+								{motStatus == "Not valid" ? (
+									<View>
+										<AntDesign name="warning" size={34} color="red" />
+										<Text style={[styles.status, styles.statusError]}>NOT VALID</Text>
+									</View>
+								) : (
+									<View>
+										<MaterialIcons name="check" size={34} color="green" />
+										<Text style={styles.status}>{motStatus}</Text>
+									</View>
+								)}
 								<Text style={styles.title}>Mot</Text>
 								<Text style={styles.date}>{motExpiryDate}</Text>
 							</View>
 							<View style={(styles.tax, styles.common)}>
-								{taxStatus == "SORN" ? <Text style={[styles.status, styles.statusError]}>DECLARED SORN</Text> : <Text style={styles.status}>{taxStatus}</Text>}
+								{taxStatus == "SORN" ? (
+									<View>
+										<AntDesign name="warning" size={34} color="red" />
+										<Text style={[styles.status, styles.statusError]}>SORN</Text>
+									</View>
+								) : (
+									<View>
+										<MaterialIcons name="check" size={34} color="green" />
+										<Text style={styles.status}>{taxStatus}</Text>
+									</View>
+								)}
 								<Text style={styles.title}>Tax</Text>
 								<Text style={styles.date}>{taxDueDate}</Text>
 							</View>
@@ -91,3 +108,5 @@ export default function App() {
 		);
 	}
 }
+
+// reg number types - for later: https://gist.github.com/danielrbradley/7567269

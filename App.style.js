@@ -8,18 +8,18 @@ export default StyleSheet.create({
 		marginTop: 20,
 		fontFamily: "RobotoCondensed_300Light",
 	},
-
 	common: {
 		display: "flex",
 		fontSize: 22,
 		paddingVertical: 30,
 		width: "50%",
+		alignItems: "center",
 	},
 	status: {
 		fontFamily: "RobotoCondensed_300Light",
 		color: "black",
 	},
-	mtContainer: {
+	resultsContainer: {
 		display: "flex",
 		flexDirection: "row",
 	},
