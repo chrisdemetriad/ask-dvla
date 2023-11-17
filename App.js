@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { StatusBar } from "expo-status-bar";
 import { Text, TextInput, View, Image } from "react-native";
 import styles from "./App.style.js";
-import { API_KEY } from "@env";
+import { API_URL, API_TOKEN } from "@env";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
-
-import Line from "./components/Line";
+import Line from "./components/Line.js";
 
 export default function App() {
 	const [data, setData] = useState({});
@@ -17,23 +16,18 @@ export default function App() {
 		RobotoCondensed_300Light: require("./assets/roboto.ttf"),
 	});
 
-	const url = "https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles";
-
 	const load = async (number) => {
-		// console.log("load() called: ", number);
-		const response = await fetch(url, {
+		const response = await fetch(API_URL, {
 			body: '{"registrationNumber":"' + number + '"}',
-			// body: '{"registrationNumber": "YT17 EFM"}',
 			headers: {
 				"Content-Type": "application/json",
-				"X-Api-Key": API_KEY,
+				"X-Api-Key": API_TOKEN,
 			},
 			method: "POST",
 		})
 			.then((response) => response.json())
 			.then((data) => {
 				setData(data);
-				// console.log(data.errors[0].code);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -46,12 +40,11 @@ export default function App() {
 
 	const onChangeText = (number) => {
 		setNumber(number);
-		// console.log("Registration plate number is " + number);
 	};
 
 	const { make, colour, engineCapacity, fuelType, revenueWeight, yearOfManufacture, motStatus, motExpiryDate, taxStatus, taxDueDate } = data;
 	if (!fontsLoaded) {
-		return <AppLoading />;
+		return null;
 	} else {
 		return (
 			<View style={styles.container}>
@@ -104,6 +97,7 @@ export default function App() {
 					</View>
 				)}
 				{!data.make && <Text style={styles.error}>Please enter a valid registration plate number.</Text>}
+				<StatusBar style="light" />
 			</View>
 		);
 	}
