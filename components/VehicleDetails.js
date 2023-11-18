@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Text, View, TouchableOpacity, Linking } from "react-native";
 // import styles from "./../App.style.js";
 import { StyleSheet } from "react-native";
@@ -96,4 +96,4 @@ const VehicleDetails = ({ vehicleData }) => {
 	);
 };
 
-export default VehicleDetails;
+export default memo(VehicleDetails);
