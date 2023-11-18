@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, TextInput, View, Image } from "react-native";
 import styles from "./App.style.js";
 import { API_URL, API_TOKEN } from "@env";
-import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
-import Line from "./components/Line.js";
+import VehicleDetails from "./components/VehicleDetails.js";
 
 export default function App() {
 	const [data, setData] = useState({});

@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
+import { Text, View } from "react-native";
+import styles from "./../App.style.js";
+import { MaterialIcons, AntDesign } from "@expo/vector-icons";
+import Line from "./Line.js";
 
 const VehicleDetails = ({ vehicleData }) => {
 	const { make, yearOfManufacture, colour, engineCapacity, fuelType, revenueWeight, motStatus, motExpiryDate, taxStatus, taxDueDate } = vehicleData;
@@ -45,3 +49,5 @@ const VehicleDetails = ({ vehicleData }) => {
 		</View>
 	);
 };
+
+export default VehicleDetails;
