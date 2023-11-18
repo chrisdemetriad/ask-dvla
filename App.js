@@ -6,10 +6,9 @@ import { useFonts } from "expo-font";
 import VehicleDetails from "./components/VehicleDetails.js";
 import useVehicleData from "./hooks/useVehicleData.js";
 
-export default function App() {
+const App = () => {
 	const { data, isLoading, error, fetchVehicleData } = useVehicleData();
 	const [number, setNumber] = useState("");
-	const onPress = () => fetchVehicleData(number);
 
 	let [fontsLoaded] = useFonts({
 		UKNumberPlate_Regular: require("./assets/uknumberplate.ttf"),
@@ -26,13 +25,15 @@ export default function App() {
 						<Image style={styles.stars} source={require("./assets/eurostars.png")} />
 						<Text style={styles.countryCode}>GB</Text>
 					</View>
-					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={setNumber} style={styles.input} placeholder="BA65 PDQ" />
+					<TextInput onSubmitEditing={() => fetchVehicleData(number)} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={setNumber} style={styles.input} placeholder="BA65 PDQ" />
 				</View>
 				{data.make ? <VehicleDetails vehicleData={data} /> : <Text style={styles.error}>Please enter a valid registration plate number.</Text>}
 				<StatusBar style="light" />
 			</View>
 		);
 	}
-}
+};
+
+export default App;
 
 // reg number types - for later: https://gist.github.com/danielrbradley/7567269
