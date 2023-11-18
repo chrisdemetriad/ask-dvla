@@ -1,47 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, TextInput, View, Image } from "react-native";
 import styles from "./App.style.js";
-import { API_URL, API_TOKEN } from "@env";
 import { useFonts } from "expo-font";
 import VehicleDetails from "./components/VehicleDetails.js";
+import useVehicleData from "./hooks/useVehicleData.js";
 
 export default function App() {
-	const [data, setData] = useState({});
+	const { data, isLoading, error, fetchVehicleData } = useVehicleData();
 	const [number, setNumber] = useState("");
+	const onPress = () => fetchVehicleData(number);
 
 	let [fontsLoaded] = useFonts({
 		UKNumberPlate_Regular: require("./assets/uknumberplate.ttf"),
 		RobotoCondensed_300Light: require("./assets/roboto.ttf"),
 	});
 
-	const load = async (number) => {
-		const response = await fetch(API_URL, {
-			body: '{"registrationNumber":"' + number + '"}',
-			headers: {
-				"Content-Type": "application/json",
-				"X-Api-Key": API_TOKEN,
-			},
-			method: "POST",
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				setData(data);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
-
-	const onPress = () => {
-		load(number);
-	};
-
-	const onChangeText = (number) => {
-		setNumber(number);
-	};
-
-	const { make, colour, engineCapacity, fuelType, revenueWeight, yearOfManufacture, motStatus, motExpiryDate, taxStatus, taxDueDate } = data;
 	if (!fontsLoaded) {
 		return null;
 	} else {
@@ -52,7 +26,7 @@ export default function App() {
 						<Image style={styles.stars} source={require("./assets/eurostars.png")} />
 						<Text style={styles.countryCode}>GB</Text>
 					</View>
-					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={onChangeText} style={styles.input} placeholder="BA65 PDQ" />
+					<TextInput onSubmitEditing={onPress} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={setNumber} style={styles.input} placeholder="BA65 PDQ" />
 				</View>
 				{data.make ? <VehicleDetails vehicleData={data} /> : <Text style={styles.error}>Please enter a valid registration plate number.</Text>}
 				<StatusBar style="light" />
