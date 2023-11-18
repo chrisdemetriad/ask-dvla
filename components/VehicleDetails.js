@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity, Linking } from "react-native";
 // import styles from "./../App.style.js";
 import { StyleSheet } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
 const VehicleDetails = ({ vehicleData }) => {
 	const { make, yearOfManufacture, colour, engineCapacity, fuelType, revenueWeight, motStatus, motExpiryDate, taxStatus, taxDueDate } = vehicleData;
 
+	const openTaxLink = () => {
+		Linking.openURL("https://www.gov.uk/vehicle-tax");
+	};
+
 	return (
 		<View>
 			<Text style={styles.vehicleDetails}>
@@ -72,10 +76,12 @@ const VehicleDetails = ({ vehicleData }) => {
 				</View>
 				<View style={styles.statusContainer}>
 					{taxStatus == "SORN" ? (
-						<View>
-							<AntDesign name="warning" size={34} color="red" />
-							<Text style={[styles.statusText, styles.statusError]}>SORN</Text>
-						</View>
+						<TouchableOpacity onPress={openTaxLink}>
+							<View>
+								<AntDesign name="warning" size={34} color="red" />
+								<Text style={[styles.statusText, styles.statusError]}>SORN</Text>
+							</View>
+						</TouchableOpacity>
 					) : (
 						<View>
 							<MaterialIcons name="check" size={34} color="green" />
