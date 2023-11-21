@@ -25,7 +25,30 @@ const useVehicleData = () => {
 			});
 
 			if (!response.ok) {
-				throw new Error("HTTP status " + response.status);
+				const errorJson = await response.json();
+				let errorMessage = errorJson.message || "Unknown error occurred";
+
+				switch (response.status) {
+					case 400:
+						errorMessage = "Bad Request: " + errorMessage;
+						break;
+					case 403:
+						errorMessage = "Forbidden: " + errorMessage;
+						break;
+					case 429:
+						errorMessage = errorMessage === "null" ? "API throttling limit exceeded" : "Too Many Requests";
+						break;
+					case 502:
+						errorMessage = "Bad Gateway: " + errorMessage;
+						break;
+					case 504:
+						errorMessage = "Gateway Timeout: " + errorMessage;
+						break;
+					default:
+						errorMessage = `Error ${response.status}: ` + errorMessage;
+				}
+
+				throw new Error(errorMessage);
 			}
 
 			const result = await response.json();
