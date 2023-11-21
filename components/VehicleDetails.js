@@ -1,16 +1,19 @@
 import React, { memo } from "react";
-import { Text, View, TouchableOpacity, Linking } from "react-native";
-// import styles from "./../App.style.js";
-import { StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, Linking, StyleSheet } from "react-native";
+import {} from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import Line from "./Line.js";
 
 const VehicleDetails = ({ vehicleData }) => {
-	const { make, yearOfManufacture, colour, engineCapacity, fuelType, revenueWeight, motStatus, motExpiryDate, taxStatus, taxDueDate } = vehicleData;
+	const { make = "", yearOfManufacture = "", colour = "", engineCapacity = "", fuelType = "", revenueWeight = "", motStatus = "", motExpiryDate = "", taxStatus = "", taxDueDate = "" } = vehicleData || {};
 
 	const openTaxLink = () => {
 		Linking.openURL("https://www.gov.uk/vehicle-tax");
 	};
+
+	if (!make && !yearOfManufacture) {
+		return <Text style={styles.noData}>No vehicle data available.</Text>;
+	}
 
 	return (
 		<View>
