@@ -5,45 +5,6 @@ import { StyleSheet } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import Line from "./Line.js";
 
-const styles = StyleSheet.create({
-	vehicleDetails: {
-		color: "black",
-		fontSize: 24,
-		marginBottom: 20,
-		marginTop: 20,
-		fontFamily: "RobotoCondensed_300Light",
-	},
-	taxContainer: {
-		display: "flex",
-		flexDirection: "row",
-	},
-	statusContainer: {
-		display: "flex",
-		fontSize: 22,
-		paddingVertical: 30,
-		width: "50%",
-		alignItems: "center",
-	},
-	statusText: {
-		fontFamily: "RobotoCondensed_300Light",
-		color: "black",
-	},
-	statusError: {
-		color: "red",
-	},
-	title: {
-		fontFamily: "UKNumberPlate_Regular",
-		fontSize: 40,
-		color: "#666666",
-		marginBottom: 30,
-	},
-	date: {
-		fontFamily: "RobotoCondensed_300Light",
-		fontSize: 26,
-		color: "black",
-	},
-});
-
 const VehicleDetails = ({ vehicleData }) => {
 	const { make, yearOfManufacture, colour, engineCapacity, fuelType, revenueWeight, motStatus, motExpiryDate, taxStatus, taxDueDate } = vehicleData;
 
@@ -95,5 +56,44 @@ const VehicleDetails = ({ vehicleData }) => {
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	vehicleDetails: {
+		color: "black",
+		fontSize: 24,
+		marginBottom: 20,
+		marginTop: 20,
+		fontFamily: "RobotoCondensed_300Light",
+	},
+	taxContainer: {
+		display: "flex",
+		flexDirection: "row",
+	},
+	statusContainer: {
+		display: "flex",
+		fontSize: 22,
+		paddingVertical: 30,
+		width: "50%",
+		alignItems: "center",
+	},
+	statusText: {
+		fontFamily: "RobotoCondensed_300Light",
+		color: "black",
+	},
+	statusError: {
+		color: "red",
+	},
+	title: {
+		fontFamily: "UKNumberPlate_Regular",
+		fontSize: 40,
+		color: "#666666",
+		marginBottom: 30,
+	},
+	date: {
+		fontFamily: "RobotoCondensed_300Light",
+		fontSize: 26,
+		color: "black",
+	},
+});
 
 export default memo(VehicleDetails);
