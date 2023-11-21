@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { API_URL, API_TOKEN } from "@env";
+import vehicleDataReducer from "../reducers/vehicleDataReducer";
 
 const useVehicleData = () => {
-	const [data, setData] = useState({});
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState(null);
+	const initialState = {
+		data: {},
+		isLoading: false,
+		error: null,
+	};
+
+	const [state, dispatch] = useReducer(vehicleDataReducer, initialState);
 
 	const fetchVehicleData = async (number) => {
-		setIsLoading(true);
-		setError(null);
+		dispatch({ type: "FETCH_INIT" });
 
 		try {
 			const response = await fetch(API_URL, {
@@ -25,15 +29,13 @@ const useVehicleData = () => {
 			}
 
 			const result = await response.json();
-			setData(result);
+			dispatch({ type: "FETCH_SUCCESS", payload: result });
 		} catch (error) {
-			setError(error.message);
-		} finally {
-			setIsLoading(false);
+			dispatch({ type: "FETCH_FAILURE", payload: error.message });
 		}
 	};
 
-	return { data, isLoading, error, fetchVehicleData };
+	return { ...state, fetchVehicleData };
 };
 
 export default useVehicleData;
