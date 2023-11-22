@@ -4,7 +4,7 @@ import appStyles from "./../App.style.js";
 
 const SettingsScreen = () => {
 	return (
-		<View style={appStyles.container}>
+		<View style={appStyles.container} accessibilityLabel={"Settings"}>
 			<Text>Settings Screen</Text>
 		</View>
 	);

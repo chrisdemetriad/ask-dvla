@@ -20,8 +20,8 @@ const HomeScreen = () => {
 		return null;
 	} else {
 		return (
-			<View style={[styles.container, appStyles.container]}>
-				<View style={styles.form}>
+			<View style={[styles.container, appStyles.container]} accessibilityLabel={"Homepage"}>
+				<View style={styles.form} accessibilityLabel={"Search box"}>
 					<View style={styles.sideInfo}>
 						<Image style={styles.stars} source={require("./../assets/eurostars.png")} />
 						<Text style={styles.countryCode}>GB</Text>
