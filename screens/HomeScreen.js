@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, TextInput, View, Image } from "react-native";
-// import styles from "./App.style.js";
+import appStyles from "./../App.style.js";
 import { useFonts } from "expo-font";
 import VehicleDetails from "../components/VehicleDetails.js";
 import useVehicleData from "../hooks/useVehicleData.js";
@@ -20,7 +20,7 @@ const HomeScreen = () => {
 		return null;
 	} else {
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container, appStyles.container]}>
 				<View style={styles.form}>
 					<View style={styles.sideInfo}>
 						<Image style={styles.stars} source={require("./../assets/eurostars.png")} />
@@ -43,11 +43,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 	},
 	container: {
-		flex: 1,
-		// color: "#ffffff",
-		justifyContent: "center",
 		padding: 20,
-		alignItems: "center",
 		width: "100%",
 	},
 	form: {
