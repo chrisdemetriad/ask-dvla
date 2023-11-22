@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, TextInput, View, Image } from "react-native";
+import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import appStyles from "./../App.style.js";
 import { useFonts } from "expo-font";
 import VehicleDetails from "../components/VehicleDetails.js";
 import useVehicleData from "../hooks/useVehicleData.js";
-import { StyleSheet } from "react-native";
+import SearchBox from "../components/SearchBox";
 
 const HomeScreen = () => {
 	const { data, isLoading, error, fetchVehicleData } = useVehicleData();
-	const [number, setNumber] = useState("");
 
 	let [fontsLoaded] = useFonts({
 		UKNumberPlate_Regular: require("./../assets/uknumberplate.ttf"),
 		RobotoCondensed_300Light: require("./../assets/roboto.ttf"),
 	});
 
-	if (!fontsLoaded) {
-		return null;
+	if (isLoading || !fontsLoaded) {
+		return (
+			<View style={[styles.container, styles.centerContent]}>
+				<ActivityIndicator size="large" color="#0000ff" />
+			</View>
+		);
 	} else {
 		return (
 			<View style={[styles.container, appStyles.container]} accessibilityLabel={"Homepage"}>
-				<View style={styles.form} accessibilityLabel={"Search box"}>
-					<View style={styles.sideInfo}>
-						<Image style={styles.stars} source={require("./../assets/eurostars.png")} />
-						<Text style={styles.countryCode}>GB</Text>
+				{!data.make && (
+					<View>
+						<Text style={styles.info}>Please enter a valid registration plate number</Text>
 					</View>
-					<TextInput onSubmitEditing={() => fetchVehicleData(number)} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={setNumber} style={styles.input} placeholder="BA65 PDQ" />
-				</View>
-				{data.make ? <VehicleDetails vehicleData={data} /> : <Text style={styles.error}>Please enter a valid registration plate number.</Text>}
+				)}
+				<SearchBox fetchVehicleData={fetchVehicleData} />
+				{data.make && <VehicleDetails vehicleData={data} />}
+				{error && <Text style={[styles.info, styles.error]}>{error}</Text>}
 				<StatusBar style="light" />
 			</View>
 		);
@@ -38,61 +41,22 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-	error: {
+	info: {
 		fontFamily: "RobotoCondensed_300Light",
-		fontSize: 16,
+		fontSize: 20,
+		marginBottom: 10,
+		marginTop: 10,
+	},
+	error: {
+		color: "red",
 	},
 	container: {
 		padding: 20,
 		width: "100%",
 	},
-	form: {
-		display: "flex",
-		position: "relative",
-		flexDirection: "row",
-		borderColor: "black",
-		borderWidth: 1,
-		borderRadius: 6,
-		justifyContent: "flex-start",
-		backgroundColor: "#0076bc",
-
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 6,
-		},
-		shadowOpacity: 0.39,
-		shadowRadius: 8.3,
-
-		elevation: 13,
-	},
-	sideInfo: {
-		display: "flex",
-		justifyContent: "flex-end",
-	},
-	stars: {
-		width: 26,
-		margin: 4,
-		height: 30,
-		marginTop: 10,
-	},
-	countryCode: {
-		color: "#fdc832",
-		fontFamily: "UKNumberPlate_Regular",
-		flexGrow: 1,
-		display: "flex",
-		alignSelf: "center",
-	},
-	input: {
-		flexGrow: 1,
-		paddingVertical: 4,
-		paddingHorizontal: 5,
-		height: 70,
-		backgroundColor: "#fdc832",
-		fontFamily: "UKNumberPlate_Regular",
-		fontSize: 55,
-		textDecorationLine: "none",
-		borderTopRightRadius: 6,
-		borderBottomRightRadius: 6,
+	centerContent: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 });
