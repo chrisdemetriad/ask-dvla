@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { Text, TextInput, View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState, useRef } from "react";
+import { Text, TextInput, View, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import SvgUKFlag from "./SvgUKFlag";
 
 const SearchBox = ({ fetchVehicleData, number, setNumber }) => {
 	const [isFocused, setIsFocused] = useState(false);
+	const inputRef = useRef(null);
 
 	const handleFocus = () => {
 		setNumber("");
 		setIsFocused(true);
+		inputRef.current && inputRef.current.focus();
 	};
 
 	const handleBlur = () => {
@@ -25,22 +27,26 @@ const SearchBox = ({ fetchVehicleData, number, setNumber }) => {
 				<SvgUKFlag />
 				<Text style={styles.countryCode}>GB</Text>
 			</View>
-			<View>
-				<TextInput
-					maxLength={7}
-					placeholder={!isFocused ? "REG NO" : ""}
-					placeholderTextColor={"#999"}
-					onBlur={handleBlur}
-					onFocus={handleFocus}
-					onChangeText={setNumber}
-					onSubmitEditing={handleSubmitEditing}
-					value={number}
-					autoCapitalize="characters"
-					spellCheck={false}
-					autoCorrect={false}
-					style={styles.input}
-				/>
-			</View>
+
+			<TouchableOpacity style={{ flex: 1 }} onPress={handleFocus}>
+				<View>
+					<TextInput
+						ref={inputRef}
+						maxLength={7}
+						placeholder={!isFocused ? "REG NO" : ""}
+						placeholderTextColor={"#999"}
+						onBlur={handleBlur}
+						onFocus={handleFocus}
+						onChangeText={setNumber}
+						onSubmitEditing={handleSubmitEditing}
+						value={number}
+						autoCapitalize="characters"
+						spellCheck={false}
+						autoCorrect={false}
+						style={styles.input}
+					/>
+				</View>
+			</TouchableOpacity>
 
 			<View style={styles.search}>
 				{number !== "" && isFocused && (
