@@ -19,7 +19,7 @@ const HomeScreen = () => {
 	if (isLoading || !fontsLoaded) {
 		return (
 			<View style={[styles.container, styles.centerContent]}>
-				<ActivityIndicator size="large" color="#0000ff" />
+				<ActivityIndicator size="xx-large" color="#0076bc" />
 			</View>
 		);
 	} else {
