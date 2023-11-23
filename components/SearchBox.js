@@ -4,12 +4,19 @@ import { MaterialIcons } from "@expo/vector-icons";
 import SvgUKFlag from "./SvgUKFlag";
 
 const SearchBox = ({ fetchVehicleData, number, setNumber }) => {
-	const handleSubmitEditing = () => {
-		fetchVehicleData(number);
-	};
+	const [isFocused, setIsFocused] = useState(false);
 
 	const handleFocus = () => {
 		setNumber("");
+		setIsFocused(true);
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
+	};
+
+	const handleSubmitEditing = () => {
+		fetchVehicleData(number);
 	};
 
 	return (
@@ -19,12 +26,15 @@ const SearchBox = ({ fetchVehicleData, number, setNumber }) => {
 				<Text style={styles.countryCode}>GB</Text>
 			</View>
 			<View>
-				<TextInput value={number} onSubmitEditing={handleSubmitEditing} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={setNumber} onFocus={handleFocus} style={styles.input} placeholder="BA65 PDQ" />
+				<TextInput placeholder={!isFocused ? "REG NO" : ""} placeholderTextColor={"#999"} onBlur={handleBlur} value={number} onSubmitEditing={handleSubmitEditing} autoCapitalize="characters" spellCheck={false} autoCorrect={false} onChangeText={setNumber} onFocus={handleFocus} style={styles.input} />
 			</View>
+
 			<View style={styles.search}>
-				<TouchableOpacity onPress={handleSubmitEditing}>
-					<MaterialIcons name="search" size={40} color="#666" />
-				</TouchableOpacity>
+				{number !== "" && (
+					<TouchableOpacity onPress={handleSubmitEditing}>
+						<MaterialIcons name="search" size={40} color="#666" />
+					</TouchableOpacity>
+				)}
 			</View>
 		</View>
 	);
@@ -64,9 +74,12 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		backgroundColor: "#fdc832",
+		color: "#333",
 		fontFamily: "UKNumberPlate_Regular",
 		fontSize: 55,
+		height: 65,
 		textDecorationLine: "none",
+		textAlign: "center",
 	},
 	search: {
 		display: "flex",

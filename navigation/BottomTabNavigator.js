@@ -22,10 +22,10 @@ const BottomTabNavigator = () => {
 					}
 					return <Icon name={iconName} size={focused ? 30 : 25} color={color} />;
 				},
-				tabBarActiveTintColor: Platform.OS === "ios" ? "#007aff" : "#333",
+				tabBarActiveTintColor: Platform.OS === "ios" ? "#007aff" : "#0076bc",
 				tabBarInactiveTintColor: "gray",
 				tabBarLabelStyle: { paddingBottom: Platform.OS === "ios" ? 5 : 2 },
-				tabBarStyle: { height: 60, paddingVertical: Platform.OS === "ios" ? 10 : 5, paddingBottom: Platform.OS === "ios" ? 10 : 10 },
+				tabBarStyle: { height: 60, paddingVertical: Platform.OS === "ios" ? 10 : 5, paddingBottom: Platform.OS === "ios" ? 5 : 10 },
 			})}
 		>
 			<Tab.Screen name="HOME" component={HomeScreen} options={{ headerShown: false }} />

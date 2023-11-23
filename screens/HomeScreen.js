@@ -18,8 +18,9 @@ const HomeScreen = () => {
 
 	if (isLoading || !fontsLoaded) {
 		return (
-			<View style={[styles.container, styles.centerContent]}>
-				<ActivityIndicator size="xx-large" color="#0076bc" />
+			<View style={[styles.container, appStyles.container]} accessibilityLabel={"Loading"}>
+				<ActivityIndicator size="large" color="#0076bc" />
+				<StatusBar style="light" />
 			</View>
 		);
 	} else {
@@ -31,7 +32,7 @@ const HomeScreen = () => {
 					</View>
 				)}
 				<SearchBox fetchVehicleData={fetchVehicleData} number={number} setNumber={setNumber} />
-				{data.make && <VehicleDetails vehicleData={data} />}
+				{data.make && !error && <VehicleDetails vehicleData={data} />}
 				{error && <Text style={[styles.info, styles.error]}>{error}</Text>}
 				<StatusBar style="light" />
 			</View>
