@@ -26,11 +26,24 @@ const SearchBox = ({ fetchVehicleData, number, setNumber }) => {
 				<Text style={styles.countryCode}>GB</Text>
 			</View>
 			<View>
-				<TextInput placeholder={!isFocused ? "REG NO" : ""} placeholderTextColor={"#999"} onBlur={handleBlur} value={number} onSubmitEditing={handleSubmitEditing} autoCapitalize="characters" spellCheck={false} autoCorrect={false} onChangeText={setNumber} onFocus={handleFocus} style={styles.input} />
+				<TextInput
+					maxLength={7}
+					placeholder={!isFocused ? "REG NO" : ""}
+					placeholderTextColor={"#999"}
+					onBlur={handleBlur}
+					onFocus={handleFocus}
+					onChangeText={setNumber}
+					onSubmitEditing={handleSubmitEditing}
+					value={number}
+					autoCapitalize="characters"
+					spellCheck={false}
+					autoCorrect={false}
+					style={styles.input}
+				/>
 			</View>
 
 			<View style={styles.search}>
-				{number !== "" && (
+				{number !== "" && isFocused && (
 					<TouchableOpacity onPress={handleSubmitEditing}>
 						<MaterialIcons name="search" size={40} color="#666" />
 					</TouchableOpacity>
