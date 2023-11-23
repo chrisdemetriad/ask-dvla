@@ -8,6 +8,7 @@ import useVehicleData from "../hooks/useVehicleData.js";
 import SearchBox from "../components/SearchBox";
 
 const HomeScreen = () => {
+	const [number, setNumber] = useState("");
 	const { data, isLoading, error, fetchVehicleData } = useVehicleData();
 
 	let [fontsLoaded] = useFonts({
@@ -29,7 +30,7 @@ const HomeScreen = () => {
 						<Text style={styles.info}>Please enter a valid registration plate number</Text>
 					</View>
 				)}
-				<SearchBox fetchVehicleData={fetchVehicleData} />
+				<SearchBox fetchVehicleData={fetchVehicleData} number={number} setNumber={setNumber} />
 				{data.make && <VehicleDetails vehicleData={data} />}
 				{error && <Text style={[styles.info, styles.error]}>{error}</Text>}
 				<StatusBar style="light" />
@@ -44,8 +45,8 @@ const styles = StyleSheet.create({
 	info: {
 		fontFamily: "RobotoCondensed_300Light",
 		fontSize: 20,
-		marginBottom: 10,
 		marginTop: 10,
+		marginBottom: 10,
 	},
 	error: {
 		color: "red",

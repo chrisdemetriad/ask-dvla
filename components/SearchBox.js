@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { Text, TextInput, View, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const SearchBox = ({ fetchVehicleData }) => {
-	const [number, setNumber] = useState("");
+const SearchBox = ({ fetchVehicleData, number, setNumber }) => {
+	const handleSubmitEditing = () => {
+		fetchVehicleData(number);
+	};
+
+	const handleFocus = () => {
+		setNumber("");
+	};
 
 	return (
 		<View style={styles.form} accessibilityLabel={"Search box"}>
@@ -11,8 +17,8 @@ const SearchBox = ({ fetchVehicleData }) => {
 				<Image style={styles.stars} source={require("./../assets/eurostars.png")} />
 				<Text style={styles.countryCode}>GB</Text>
 			</View>
-			<TextInput onSubmitEditing={() => fetchVehicleData(number)} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={setNumber} style={styles.input} placeholder="BA65 PDQ" />
-			<TouchableOpacity onPress={() => fetchVehicleData(number)} style={styles.searchIcon}>
+			<TextInput value={number} onSubmitEditing={handleSubmitEditing} autoCapitalize="characters" spellCheck={false} autoCorrect={false} textAlign={"center"} onChangeText={setNumber} onFocus={handleFocus} style={styles.input} placeholder="BA65 PDQ" />
+			<TouchableOpacity onPress={handleSubmitEditing} style={styles.searchIcon}>
 				<MaterialIcons name="search" size={30} color="#000" />
 			</TouchableOpacity>
 		</View>
