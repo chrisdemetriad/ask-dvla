@@ -1,8 +1,9 @@
 import React, { memo } from "react";
-import { Text, View, TouchableOpacity, Linking, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import {} from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import Line from "./Line";
+import VehicleDetailsStatus from "./VehicleDetailsStatus";
 
 interface VehicleData {
 	make?: string;
@@ -24,10 +25,6 @@ interface VehicleDetailsProps {
 const VehicleDetails: React.FC<VehicleDetailsProps> = ({ vehicleData }) => {
 	const { make = "", yearOfManufacture = "", colour = "", engineCapacity = "", fuelType = "", revenueWeight = "", motStatus = "", motExpiryDate = "", taxStatus = "", taxDueDate = "" } = vehicleData || {};
 
-	const openTaxLink = () => {
-		Linking.openURL("https://www.gov.uk/vehicle-tax");
-	};
-
 	if (!make && !yearOfManufacture) {
 		return <Text style={styles.statusError}>No vehicle data available.</Text>;
 	}
@@ -40,38 +37,8 @@ const VehicleDetails: React.FC<VehicleDetailsProps> = ({ vehicleData }) => {
 			</Text>
 			<Line />
 			<View style={styles.taxContainer}>
-				<View style={styles.statusContainer}>
-					{motStatus == "Not valid" ? (
-						<View>
-							<AntDesign name="warning" size={34} color="red" />
-							<Text style={[styles.statusText, styles.statusError]}>NOT VALID</Text>
-						</View>
-					) : (
-						<View>
-							<MaterialIcons name="check" size={34} color="green" />
-							<Text style={styles.statusText}>{motStatus}</Text>
-						</View>
-					)}
-					<Text style={styles.title}>Mot</Text>
-					<Text style={styles.date}>{motExpiryDate}</Text>
-				</View>
-				<View style={styles.statusContainer}>
-					{taxStatus == "SORN" ? (
-						<TouchableOpacity onPress={openTaxLink}>
-							<View>
-								<AntDesign name="warning" size={34} color="red" />
-								<Text style={[styles.statusText, styles.statusError]}>SORN</Text>
-							</View>
-						</TouchableOpacity>
-					) : (
-						<View>
-							<MaterialIcons name="check" size={34} color="green" />
-							<Text style={styles.statusText}>{taxStatus}</Text>
-						</View>
-					)}
-					<Text style={styles.title}>Road</Text>
-					<Text style={styles.date}>{taxDueDate}</Text>
-				</View>
+				<VehicleDetailsStatus isValid={motStatus === "Valid"} title="Mot" statusText={motStatus === "Valid" ? "VALID" : "NOT VALID"} date={motExpiryDate} />
+				<VehicleDetailsStatus isValid={taxStatus === "Taxed"} title="Road" statusText={taxStatus === "Taxed" ? "TAXED" : "SORN"} date={taxDueDate} />
 			</View>
 		</View>
 	);
@@ -107,12 +74,15 @@ const styles = StyleSheet.create({
 		fontFamily: "UKNumberPlate_Regular",
 		fontSize: 40,
 		color: "#666666",
-		marginBottom: 30,
+		marginTop: 30,
 	},
 	date: {
 		fontFamily: "RobotoCondensed_300Light",
 		fontSize: 26,
 		color: "black",
+	},
+	linkButton: {
+		marginVertical: 24,
 	},
 });
 

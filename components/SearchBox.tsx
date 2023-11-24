@@ -34,7 +34,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ fetchVehicleData, number, setNumb
 				<Text style={styles.countryCode}>GB</Text>
 			</View>
 
-			<TouchableOpacity style={{ flex: 1 }} onPress={handleFocus}>
+			<TouchableOpacity onPress={handleFocus} style={styles.inputContainer}>
 				<View>
 					<TextInput
 						ref={inputRef}
@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
 		color: "#fff",
 		fontFamily: "UKNumberPlate_Regular",
 		alignSelf: "center",
+	},
+	inputContainer: {
+		flex: 1,
 	},
 	input: {
 		backgroundColor: "#fdc832",
