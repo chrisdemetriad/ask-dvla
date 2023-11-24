@@ -2,9 +2,26 @@ import React, { memo } from "react";
 import { Text, View, TouchableOpacity, Linking, StyleSheet } from "react-native";
 import {} from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import Line from "./Line.js";
+import Line from "./Line";
 
-const VehicleDetails = ({ vehicleData }) => {
+interface VehicleData {
+	make?: string;
+	yearOfManufacture?: string;
+	colour?: string;
+	engineCapacity?: string;
+	fuelType?: string;
+	revenueWeight?: string;
+	motStatus?: string;
+	motExpiryDate?: string;
+	taxStatus?: string;
+	taxDueDate?: string;
+}
+
+interface VehicleDetailsProps {
+	vehicleData?: VehicleData;
+}
+
+const VehicleDetails: React.FC<VehicleDetailsProps> = ({ vehicleData }) => {
 	const { make = "", yearOfManufacture = "", colour = "", engineCapacity = "", fuelType = "", revenueWeight = "", motStatus = "", motExpiryDate = "", taxStatus = "", taxDueDate = "" } = vehicleData || {};
 
 	const openTaxLink = () => {
@@ -12,7 +29,7 @@ const VehicleDetails = ({ vehicleData }) => {
 	};
 
 	if (!make && !yearOfManufacture) {
-		return <Text style={styles.noData}>No vehicle data available.</Text>;
+		return <Text style={styles.statusError}>No vehicle data available.</Text>;
 	}
 
 	return (

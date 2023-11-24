@@ -2,8 +2,18 @@ import { useReducer } from "react";
 import { API_URL, API_TOKEN } from "@env";
 import vehicleDataReducer from "../reducers/vehicleDataReducer";
 
+interface VehicleDataState {
+	data: any;
+	isLoading: boolean;
+	error: string | null;
+}
+
+interface FetchVehicleData {
+	(number: string): Promise<void>;
+}
+
 const useVehicleData = () => {
-	const initialState = {
+	const initialState: VehicleDataState = {
 		data: {},
 		isLoading: false,
 		error: null,
@@ -11,7 +21,7 @@ const useVehicleData = () => {
 
 	const [state, dispatch] = useReducer(vehicleDataReducer, initialState);
 
-	const fetchVehicleData = async (number) => {
+	const fetchVehicleData: FetchVehicleData = async (number) => {
 		dispatch({ type: "FETCH_INIT" });
 
 		try {

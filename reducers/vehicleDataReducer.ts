@@ -1,4 +1,12 @@
-const vehicleDataReducer = (state, action) => {
+interface VehicleDataState {
+	data: any;
+	isLoading: boolean;
+	error: string | null;
+}
+
+type VehicleDataAction = { type: "FETCH_INIT" } | { type: "FETCH_SUCCESS"; payload: any } | { type: "FETCH_FAILURE"; payload: string };
+
+const vehicleDataReducer = (state: VehicleDataState, action: VehicleDataAction): VehicleDataState => {
 	switch (action.type) {
 		case "FETCH_INIT":
 			return { ...state, isLoading: true, error: null };

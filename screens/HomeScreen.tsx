@@ -3,11 +3,11 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import appStyles from "./../App.style.js";
 import { useFonts } from "expo-font";
-import VehicleDetails from "../components/VehicleDetails.js";
-import useVehicleData from "../hooks/useVehicleData.js";
+import VehicleDetails from "../components/VehicleDetails";
+import useVehicleData from "../hooks/useVehicleData";
 import SearchBox from "../components/SearchBox";
 
-const HomeScreen = () => {
+const HomeScreen: React.FC = () => {
 	const [number, setNumber] = useState("");
 	const { data, isLoading, error, fetchVehicleData } = useVehicleData();
 

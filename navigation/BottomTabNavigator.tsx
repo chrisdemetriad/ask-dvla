@@ -1,16 +1,20 @@
 import React from "react";
+import { RouteProp } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import HomeScreen from "../screens/HomeScreen";
 import HelpScreen from "../screens/HelpScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import { Platform } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = () => {
+type TabRouteProps = RouteProp<Record<string, object | undefined>, string>;
+
+const BottomTabNavigator: React.FC = () => {
 	return (
 		<Tab.Navigator
-			screenOptions={({ route }) => ({
+			screenOptions={({ route }: { route: TabRouteProps }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 					if (route.name === "HOME") {

@@ -3,9 +3,15 @@ import { Text, TextInput, View, TouchableOpacity, StyleSheet } from "react-nativ
 import { MaterialIcons } from "@expo/vector-icons";
 import SvgUKFlag from "./SvgUKFlag";
 
-const SearchBox = ({ fetchVehicleData, number, setNumber }) => {
+interface SearchBoxProps {
+	fetchVehicleData: (number: string) => void;
+	number: string;
+	setNumber: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SearchBox: React.FC<SearchBoxProps> = ({ fetchVehicleData, number, setNumber }) => {
 	const [isFocused, setIsFocused] = useState(false);
-	const inputRef = useRef(null);
+	const inputRef = useRef<TextInput | null>(null);
 
 	const handleFocus = () => {
 		setNumber("");
