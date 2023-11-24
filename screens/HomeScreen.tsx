@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import appStyles from "./../App.style.js";
 import { useFonts } from "expo-font";
@@ -20,7 +19,6 @@ const HomeScreen: React.FC = () => {
 		return (
 			<View style={[styles.container, appStyles.container]} accessibilityLabel={"Loading"}>
 				<ActivityIndicator size="large" color="#0076bc" />
-				<StatusBar style="light" />
 			</View>
 		);
 	} else {
@@ -34,7 +32,6 @@ const HomeScreen: React.FC = () => {
 				<SearchBox fetchVehicleData={fetchVehicleData} number={number} setNumber={setNumber} />
 				{data.make && !error && <VehicleDetails vehicleData={data} />}
 				{error && <Text style={[styles.info, styles.error]}>{error}</Text>}
-				<StatusBar style="light" />
 			</View>
 		);
 	}
