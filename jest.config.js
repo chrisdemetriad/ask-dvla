@@ -5,4 +5,6 @@ module.exports = {
 	transform: {
 		"^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
 	},
+	collectCoverage: true,
+	collectCoverageFrom: ["**/*.{ts,tsx}", "!**/node_modules/**", "!**/vendor/**"],
 };
