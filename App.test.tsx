@@ -9,6 +9,6 @@ describe("App", () => {
 	it("App renders correctly", () => {
 		const { getByTestId } = render(<App />);
 
-		expect(getByTestId("ask-dvla-app")).toBeTruthy();
+		expect(getByTestId("ask-dvla-app")).toBeVisible();
 	});
 });

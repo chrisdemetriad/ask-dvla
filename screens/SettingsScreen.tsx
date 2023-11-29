@@ -4,7 +4,7 @@ import appStyles from "./../App.style.js";
 
 const SettingsScreen: React.FC = () => {
 	return (
-		<View style={appStyles.container} accessibilityLabel={"Settings"}>
+		<View testID="settings-screen" style={appStyles.container} accessibilityLabel={"Settings"}>
 			<Text>Settings Screen</Text>
 		</View>
 	);

@@ -4,7 +4,7 @@ import appStyles from "./../App.style.js";
 
 const HelpScreen: React.FC = () => {
 	return (
-		<View style={appStyles.container} accessibilityLabel={"Help"}>
+		<View testID="help-screen" style={appStyles.container} accessibilityLabel={"Help"}>
 			<Text>Help Screen</Text>
 		</View>
 	);

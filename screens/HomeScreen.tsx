@@ -17,13 +17,13 @@ const HomeScreen: React.FC = () => {
 
 	if (isLoading || !fontsLoaded) {
 		return (
-			<View style={[styles.container, appStyles.container]} accessibilityLabel={"Loading"}>
+			<View testID="home-screen" style={[styles.container, appStyles.container]} accessibilityLabel={"Loading"}>
 				<ActivityIndicator size="large" color="#0076bc" />
 			</View>
 		);
 	} else {
 		return (
-			<View style={[styles.container, appStyles.container]} accessibilityLabel={"Homepage"}>
+			<View testID="home-screen" style={[styles.container, appStyles.container]} accessibilityLabel={"Homepage"}>
 				{!data.make && (
 					<View>
 						<Text style={styles.info}>Please enter a valid registration plate number</Text>
