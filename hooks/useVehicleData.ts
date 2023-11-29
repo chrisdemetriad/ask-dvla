@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { API_URL, API_TOKEN } from "@env";
+import { API_URL, API_TOKEN } from "react-native-dotenv";
 import vehicleDataReducer from "../reducers/vehicleDataReducer";
 
 interface VehicleDataState {
