@@ -28,7 +28,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ fetchVehicleData, number, setNumb
 	};
 
 	return (
-		<View style={styles.plate} accessibilityLabel={"Search box"}>
+		<View testID="search" style={styles.plate} accessibilityLabel={"Search box"}>
 			<View style={styles.country}>
 				<SvgUKFlag />
 				<Text style={styles.countryCode}>GB</Text>
@@ -56,7 +56,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ fetchVehicleData, number, setNumb
 
 			<View style={styles.search}>
 				{number !== "" && isFocused && (
-					<TouchableOpacity onPress={handleSubmitEditing}>
+					<TouchableOpacity onPress={handleSubmitEditing} testID="search-icon">
 						<MaterialIcons name="search" size={40} color="#666" />
 					</TouchableOpacity>
 				)}

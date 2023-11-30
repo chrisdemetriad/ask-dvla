@@ -6,7 +6,7 @@ jest.mock("./navigation/BottomTabNavigator", () => "BottomTabNavigator");
 jest.mock("./components/CustomStatusBar", () => "CustomStatusBar");
 
 describe("App", () => {
-	it("App renders correctly", () => {
+	it("renders correctly", () => {
 		const { getByTestId } = render(<App />);
 
 		expect(getByTestId("ask-dvla-app")).toBeVisible();

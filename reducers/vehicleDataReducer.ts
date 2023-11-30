@@ -4,7 +4,7 @@ interface VehicleDataState {
 	error: string | null;
 }
 
-type VehicleDataAction = { type: "FETCH_INIT" } | { type: "FETCH_SUCCESS"; payload: any } | { type: "FETCH_FAILURE"; payload: string };
+export type VehicleDataAction = { type: "FETCH_INIT" } | { type: "FETCH_SUCCESS"; payload: any } | { type: "FETCH_FAILURE"; payload: string };
 
 const vehicleDataReducer = (state: VehicleDataState, action: VehicleDataAction): VehicleDataState => {
 	switch (action.type) {

@@ -10,7 +10,7 @@ const VehicleDetailsStatus: React.FC<{
 	date: string;
 }> = ({ isValid, title, statusText, date }) => {
 	return (
-		<View style={styles.statusContainer}>
+		<View style={styles.statusContainer} testID="vehicle-details-status">
 			{isValid ? (
 				<>
 					<MaterialIcons name="check" size={34} color="green" />

@@ -25,12 +25,12 @@ interface VehicleDetailsProps {
 const VehicleDetails: React.FC<VehicleDetailsProps> = ({ vehicleData }) => {
 	const { make = "", yearOfManufacture = "", colour = "", engineCapacity = "", fuelType = "", revenueWeight = "", motStatus = "", motExpiryDate = "", taxStatus = "", taxDueDate = "" } = vehicleData || {};
 
-	if (!make && !yearOfManufacture) {
+	if (!make || !yearOfManufacture) {
 		return <Text style={styles.statusError}>No vehicle data available.</Text>;
 	}
 
 	return (
-		<View>
+		<View testID="vehicle-details">
 			<Text style={styles.vehicleDetails}>
 				{yearOfManufacture} {make}, {colour}, {engineCapacity}cc, {fuelType}
 				{revenueWeight && ", " + revenueWeight + "kg"}
