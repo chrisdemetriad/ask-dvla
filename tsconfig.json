@@ -2,5 +2,6 @@
 	"compilerOptions": {
 		"types": ["jest"]
 	},
-	"extends": "expo/tsconfig.base"
+	"extends": "expo/tsconfig.base",
+	"typeRoots": ["./types"]
 }
