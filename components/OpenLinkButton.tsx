@@ -18,7 +18,7 @@ const OpenLinkButton: React.FC<{
 	};
 
 	return (
-		<View style={styles.button}>
+		<View accessibilityRole="button" accessibilityLabel="Search button" style={styles.button}>
 			<Button title={buttonText} onPress={handlePress} />
 		</View>
 	);

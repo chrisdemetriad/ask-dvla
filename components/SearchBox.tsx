@@ -28,7 +28,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ fetchVehicleData, number, setNumb
 	};
 
 	return (
-		<View testID="search" style={styles.plate} accessibilityLabel={"Search box"}>
+		<View testID="search" style={styles.plate} accessibilityLabel="Search box">
 			<View style={styles.country}>
 				<SvgUKFlag />
 				<Text style={styles.countryCode}>GB</Text>
