@@ -1,5 +1,7 @@
 # ASK DVLA
 
+!["Demo"](https://github.com/chrisdemetriad/ask-dvla/blob/main/assets/demo.gif)
+
 ## Overview
 
 The ASK DVLA is a React Native application designed to provide detailed information about vehicles based on their registration numbers. Utilizing a user-friendly interface and efficient API calls, the app offers a convenient way for users to access a variety of vehicle-related data.
