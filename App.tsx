@@ -3,15 +3,18 @@ import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import CustomStatusBar from "./components/CustomStatusBar";
+import { ThemeProvider } from "./ThemeContext";
 
 const App: React.FC = () => {
 	return (
-		<View style={styles.container} testID="ask-dvla-app">
-			<NavigationContainer>
-				<CustomStatusBar />
-				<BottomTabNavigator />
-			</NavigationContainer>
-		</View>
+		<ThemeProvider>
+			<View style={styles.container} testID="ask-dvla-app">
+				<NavigationContainer>
+					<CustomStatusBar />
+					<BottomTabNavigator />
+				</NavigationContainer>
+			</View>
+		</ThemeProvider>
 	);
 };
 

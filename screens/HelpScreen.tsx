@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useTheme } from "./../ThemeContext";
+import getStyles from "./../App.style.js";
 
 const HelpScreen: React.FC = () => {
+	const { isDarkTheme } = useTheme();
+	const appStyles = getStyles(isDarkTheme);
+
 	const [expandedFAQIndex, setExpandedFAQIndex] = useState<number | null>(null);
 
 	const handleToggleFAQ = (index: number) => {
@@ -52,8 +57,52 @@ const HelpScreen: React.FC = () => {
 		},
 	];
 
+	const styles = StyleSheet.create({
+		screen: {
+			flex: 1,
+		},
+		title: {
+			fontSize: 24,
+			fontWeight: "bold",
+			padding: 15,
+			color: isDarkTheme ? "#eee" : "#333",
+		},
+		faqList: {
+			flex: 1,
+			padding: 15,
+		},
+		faqItem: {
+			borderBottomWidth: 1,
+			borderBottomColor: isDarkTheme ? "#222" : "#eee",
+			paddingVertical: 10,
+		},
+		lastItem: {
+			borderBottomWidth: 0,
+		},
+		questionContainer: {
+			flexDirection: "row",
+			justifyContent: "space-between",
+			alignItems: "center",
+		},
+		question: {
+			flex: 1,
+			fontSize: 18,
+			paddingRight: 10,
+			color: isDarkTheme ? "#aaa" : "#333",
+		},
+		icon: {
+			color: "#666",
+		},
+		answer: {
+			marginTop: 20,
+			fontSize: 16,
+
+			color: isDarkTheme ? "#eee" : "#666",
+		},
+	});
+
 	return (
-		<View style={styles.screen}>
+		<View style={[styles.screen, appStyles.container]}>
 			<Text style={styles.title}>Frequently Asked Questions</Text>
 			<ScrollView style={styles.faqList}>
 				{faqs.map((faq, index) => (
@@ -69,46 +118,5 @@ const HelpScreen: React.FC = () => {
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-	},
-	title: {
-		fontSize: 24,
-		fontWeight: "bold",
-		padding: 15,
-	},
-	faqList: {
-		flex: 1,
-		padding: 15,
-	},
-	faqItem: {
-		borderBottomWidth: 1,
-		borderBottomColor: "#ccc",
-		paddingVertical: 10,
-	},
-	lastItem: {
-		borderBottomWidth: 0,
-	},
-	questionContainer: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-	},
-	question: {
-		flex: 1,
-		fontSize: 18,
-		paddingRight: 10,
-	},
-	icon: {
-		color: "#666",
-	},
-	answer: {
-		fontSize: 16,
-		marginTop: 5,
-		color: "#333",
-	},
-});
 
 export default HelpScreen;

@@ -2,6 +2,8 @@ import React, { memo } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import OpenLinkButton from "./OpenLinkButton";
+import { useTheme } from "./../ThemeContext";
+import getStyles from "./../App.style.js";
 
 const VehicleDetailsStatus: React.FC<{
 	isValid: boolean;
@@ -9,6 +11,50 @@ const VehicleDetailsStatus: React.FC<{
 	statusText: string;
 	date: string;
 }> = ({ isValid, title, statusText, date }) => {
+	const { isDarkTheme } = useTheme();
+
+	const styles = StyleSheet.create({
+		vehicleDetails: {
+			color: "black",
+			fontSize: 24,
+			marginBottom: 20,
+			marginTop: 20,
+			fontFamily: "RobotoCondensed_300Light",
+		},
+		taxContainer: {
+			display: "flex",
+			flexDirection: "row",
+		},
+		statusContainer: {
+			display: "flex",
+			fontSize: 22,
+			paddingVertical: 30,
+			width: "50%",
+			alignItems: "center",
+		},
+		statusText: {
+			fontFamily: "RobotoCondensed_300Light",
+			color: isDarkTheme ? "#eee" : "#333",
+		},
+		statusError: {
+			color: "red",
+		},
+		title: {
+			fontFamily: "UKNumberPlate_Regular",
+			fontSize: 40,
+			color: "#666666",
+			marginTop: 30,
+		},
+		date: {
+			fontFamily: "RobotoCondensed_300Light",
+			fontSize: 26,
+			color: isDarkTheme ? "#eee" : "#333",
+		},
+		linkButton: {
+			marginVertical: 24,
+		},
+	});
+
 	return (
 		<View style={styles.statusContainer} testID="vehicle-details-status">
 			{isValid ? (
@@ -16,6 +62,7 @@ const VehicleDetailsStatus: React.FC<{
 					<MaterialIcons name="check" size={34} color="green" />
 					<Text style={styles.title}>{title}</Text>
 					<Text style={styles.statusText}>{statusText}</Text>
+					<Text style={styles.date}>{date}</Text>
 				</>
 			) : (
 				<>
@@ -27,51 +74,8 @@ const VehicleDetailsStatus: React.FC<{
 					</View>
 				</>
 			)}
-			<Text style={styles.date}>{date}</Text>
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	vehicleDetails: {
-		color: "black",
-		fontSize: 24,
-		marginBottom: 20,
-		marginTop: 20,
-		fontFamily: "RobotoCondensed_300Light",
-	},
-	taxContainer: {
-		display: "flex",
-		flexDirection: "row",
-	},
-	statusContainer: {
-		display: "flex",
-		fontSize: 22,
-		paddingVertical: 30,
-		width: "50%",
-		alignItems: "center",
-	},
-	statusText: {
-		fontFamily: "RobotoCondensed_300Light",
-		color: "black",
-	},
-	statusError: {
-		color: "red",
-	},
-	title: {
-		fontFamily: "UKNumberPlate_Regular",
-		fontSize: 40,
-		color: "#666666",
-		marginTop: 30,
-	},
-	date: {
-		fontFamily: "RobotoCondensed_300Light",
-		fontSize: 26,
-		color: "black",
-	},
-	linkButton: {
-		marginVertical: 24,
-	},
-});
 
 export default memo(VehicleDetailsStatus);
