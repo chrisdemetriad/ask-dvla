@@ -1,6 +1,6 @@
 declare module "@env" {
-	export const API_URL: string;
-	export const API_TOKEN: string;
+	export const REACT_APP_API_URL: string;
+	export const REACT_APP_API_TOKEN: string;
 }
 
 // https://github.com/zetachang/react-native-dotenv/issues/76
