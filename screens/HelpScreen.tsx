@@ -102,7 +102,7 @@ const HelpScreen: React.FC = () => {
 	});
 
 	return (
-		<View style={[styles.screen, appStyles.container]}>
+		<View style={[styles.screen, appStyles.container]} testID="help-screen">
 			<Text style={styles.title}>Frequently Asked Questions</Text>
 			<ScrollView style={styles.faqList}>
 				{faqs.map((faq, index) => (

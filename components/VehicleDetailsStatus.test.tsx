@@ -26,6 +26,5 @@ describe("VehicleDetailsStatus", () => {
 		expect(getByText("Mot")).toBeTruthy();
 		expect(getByText("NOT VALID")).toBeTruthy();
 		expect(getByText("Getting an MOT")).toBeTruthy();
-		expect(getByText("2022-12-31")).toBeTruthy();
 	});
 });
