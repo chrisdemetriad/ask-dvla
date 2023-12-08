@@ -1,5 +1,4 @@
 import { useReducer } from "react";
-import { REACT_APP_API_URL, REACT_APP_API_TOKEN } from "@env";
 import vehicleDataReducer from "../reducers/vehicleDataReducer";
 
 interface VehicleDataState {
@@ -19,17 +18,20 @@ const useVehicleData = () => {
 		error: null,
 	};
 
+	const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+	const apiToken = process.env.EXPO_PUBLIC_API_TOKEN;
+
 	const [state, dispatch] = useReducer(vehicleDataReducer, initialState);
 
 	const fetchVehicleData: FetchVehicleData = async (number) => {
 		dispatch({ type: "FETCH_INIT" });
 
 		try {
-			const response = await fetch(REACT_APP_API_URL, {
+			const response = await fetch(apiUrl, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"X-Api-Key": REACT_APP_API_TOKEN,
+					"X-Api-Key": apiToken,
 				},
 				body: JSON.stringify({ registrationNumber: number }),
 			});
