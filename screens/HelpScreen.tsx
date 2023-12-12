@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "./../ThemeContext";
-import getStyles from "./../App.style.js";
+import getStyles from "./../App.style";
 
 const HelpScreen: React.FC = () => {
 	const { isDarkTheme } = useTheme();
@@ -102,7 +102,7 @@ const HelpScreen: React.FC = () => {
 	});
 
 	return (
-		<View style={[styles.screen, appStyles.container]} testID="help-screen">
+		<View style={[styles.screen, appStyles.container]} testID="help-screen" accessibilityLabel="Help screen">
 			<Text style={styles.title}>Frequently Asked Questions</Text>
 			<ScrollView style={styles.faqList}>
 				{faqs.map((faq, index) => (

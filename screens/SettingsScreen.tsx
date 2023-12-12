@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Switch, StyleSheet } from "react-native";
 import { useTheme } from "./../ThemeContext";
-import getStyles from "./../App.style.js";
+import getStyles from "./../App.style";
 
 const SettingsScreen = () => {
 	const { isDarkTheme, setIsDarkTheme } = useTheme();

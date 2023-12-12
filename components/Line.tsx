@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useTheme } from "./../ThemeContext";
-import getStyles from "./../App.style.js";
+import getStyles from "./../App.style";
 
 const Line: React.FC = () => {
 	const { isDarkTheme } = useTheme();

@@ -4,7 +4,6 @@ import {} from "react-native";
 import Line from "./Line";
 import VehicleDetailsStatus from "./VehicleDetailsStatus";
 import { useTheme } from "./../ThemeContext";
-import getStyles from "./../App.style.js";
 
 interface VehicleData {
 	make?: string;

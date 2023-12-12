@@ -3,7 +3,6 @@ import { Text, View, StyleSheet } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import OpenLinkButton from "./OpenLinkButton";
 import { useTheme } from "./../ThemeContext";
-import getStyles from "./../App.style.js";
 
 const VehicleDetailsStatus: React.FC<{
 	isValid: boolean;
