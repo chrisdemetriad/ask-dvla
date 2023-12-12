@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import HomeScreen from "../screens/HomeScreen";
 import HelpScreen from "../screens/HelpScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import MotHistory from "../screens/MotHistory";
 import { Platform } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -17,8 +18,10 @@ const BottomTabNavigator: React.FC = () => {
 			screenOptions={({ route }: { route: TabRouteProps }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
-					if (route.name === "HOME") {
+					if (route.name === "CHECK MOT/TAX") {
 						iconName = "home";
+					} else if (route.name === "MOT HISTORY") {
+						iconName = "history";
 					} else if (route.name === "HELP") {
 						iconName = "help";
 					} else if (route.name === "SETTINGS") {
@@ -32,7 +35,8 @@ const BottomTabNavigator: React.FC = () => {
 				tabBarStyle: { height: 60, paddingVertical: Platform.OS === "ios" ? 10 : 5, paddingBottom: Platform.OS === "ios" ? 5 : 10 },
 			})}
 		>
-			<Tab.Screen name="HOME" component={HomeScreen} options={{ headerShown: false }} />
+			<Tab.Screen name="CHECK MOT/TAX" component={HomeScreen} options={{ headerShown: false }} />
+			<Tab.Screen name="MOT HISTORY" component={MotHistory} options={{ headerShown: false }} />
 			<Tab.Screen name="HELP" component={HelpScreen} options={{ headerShown: false }} />
 			<Tab.Screen name="SETTINGS" component={SettingsScreen} options={{ headerShown: false }} />
 		</Tab.Navigator>
