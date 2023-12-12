@@ -7,7 +7,7 @@ describe("HomeScreen", () => {
 		const { getByTestId } = render(<HomeScreen />);
 
 		await waitFor(() => {
-			expect(getByTestId("home-screen")).toBeVisible();
+			expect(getByTestId("check-mot-tax")).toBeVisible();
 		});
 	});
 });
