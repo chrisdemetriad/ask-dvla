@@ -18,8 +18,8 @@ const useVehicleData = () => {
 		error: null,
 	};
 
-	const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-	const apiToken = process.env.EXPO_PUBLIC_API_TOKEN;
+	const vehicleEnquiryApiUrl = process.env.EXPO_PUBLIC_VEHICLE_ENQUIRY_API_URL;
+	const vehicleEnquiryApiToken = process.env.EXPO_PUBLIC_VEHICLE_ENQUIRY_API_TOKEN;
 
 	const [state, dispatch] = useReducer(vehicleDataReducer, initialState);
 
@@ -27,11 +27,11 @@ const useVehicleData = () => {
 		dispatch({ type: "FETCH_INIT" });
 
 		try {
-			const response = await fetch(apiUrl, {
+			const response = await fetch(vehicleEnquiryApiUrl, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"X-Api-Key": apiToken,
+					"X-Api-Key": vehicleEnquiryApiToken,
 				},
 				body: JSON.stringify({ registrationNumber: number }),
 			});
