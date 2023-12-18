@@ -1,10 +1,10 @@
 import React from "react";
 import { render, waitFor } from "@testing-library/react-native";
-import HomeScreen from "./HomeScreen";
+import MotAndTax from "./MotAndTax";
 
-describe("HomeScreen", () => {
-	it("HomeScreen renders correctly", async () => {
-		const { getByTestId } = render(<HomeScreen />);
+describe("MotAndTax", () => {
+	it("MotAndTax renders correctly", async () => {
+		const { getByTestId } = render(<MotAndTax />);
 
 		await waitFor(() => {
 			expect(getByTestId("check-mot-tax")).toBeVisible();

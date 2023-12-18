@@ -2,7 +2,7 @@ import React from "react";
 import { RouteProp } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import HomeScreen from "../screens/HomeScreen";
+import MotAndTax from "../screens/MotAndTax";
 import HelpScreen from "../screens/HelpScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import MotHistory from "../screens/MotHistory";
@@ -35,7 +35,7 @@ const BottomTabNavigator: React.FC = () => {
 				tabBarStyle: { height: 60, paddingVertical: Platform.OS === "ios" ? 10 : 5, paddingBottom: Platform.OS === "ios" ? 5 : 10 },
 			})}
 		>
-			<Tab.Screen name="CHECK MOT/TAX" component={HomeScreen} options={{ headerShown: false }} />
+			<Tab.Screen name="CHECK MOT/TAX" component={MotAndTax} options={{ headerShown: false }} />
 			<Tab.Screen name="MOT HISTORY" component={MotHistory} options={{ headerShown: false }} />
 			<Tab.Screen name="HELP" component={HelpScreen} options={{ headerShown: false }} />
 			<Tab.Screen name="SETTINGS" component={SettingsScreen} options={{ headerShown: false }} />

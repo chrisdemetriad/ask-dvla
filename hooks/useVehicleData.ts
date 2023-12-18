@@ -8,7 +8,7 @@ interface VehicleDataState {
 }
 
 interface FetchVehicleData {
-	(number: string): Promise<void>;
+	(number: string, onSuccess?: (result: any) => void): Promise<void>;
 }
 
 const useVehicleData = () => {
@@ -23,7 +23,7 @@ const useVehicleData = () => {
 
 	const [state, dispatch] = useReducer(vehicleDataReducer, initialState);
 
-	const fetchVehicleData: FetchVehicleData = async (number) => {
+	const fetchVehicleData: FetchVehicleData = async (number, onSuccess) => {
 		dispatch({ type: "FETCH_INIT" });
 
 		try {
@@ -65,6 +65,10 @@ const useVehicleData = () => {
 
 			const result = await response.json();
 			dispatch({ type: "FETCH_SUCCESS", payload: result });
+
+			if (onSuccess && result) {
+				onSuccess(result);
+			}
 		} catch (error) {
 			dispatch({ type: "FETCH_FAILURE", payload: error.message });
 		}

@@ -1,6 +1,31 @@
 import { useReducer } from "react";
 import motHistoryReducer from "../reducers/motHistoryReducer";
 
+export interface MotHistory {
+	registration: string;
+	make: string;
+	model: string;
+	firstUsedDate: string;
+	fuelType: string;
+	primaryColour: string;
+	motTests: MotTest[];
+}
+
+export interface MotTest {
+	completedDate: string;
+	testResult: string;
+	expiryDate?: string;
+	odometerValue: string;
+	odometerUnit: string;
+	motTestNumber: string;
+	rfrAndComments: RfrAndComment[];
+}
+
+export interface RfrAndComment {
+	text: string;
+	type: string;
+}
+
 const useMotHistory = () => {
 	const initialState: any = {};
 

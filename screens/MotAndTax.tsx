@@ -4,10 +4,10 @@ import { useFonts } from "expo-font";
 import VehicleDetails from "../components/VehicleDetails";
 import useVehicleData from "../hooks/useVehicleData";
 import SearchBox from "../components/SearchBox";
-import { useTheme } from "./../ThemeContext";
-import getStyles from "./../App.style";
+import { useTheme } from "../ThemeContext";
+import getStyles from "../App.style";
 
-const HomeScreen: React.FC = () => {
+const MotAndTax: React.FC = () => {
 	const [number, setNumber] = useState("");
 	const { data, isLoading, error, fetchVehicleData } = useVehicleData();
 
@@ -80,4 +80,4 @@ const HomeScreen: React.FC = () => {
 	}
 };
 
-export default HomeScreen;
+export default MotAndTax;
